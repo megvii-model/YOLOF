@@ -46,3 +46,4 @@ tools/pods_*
 #
 # soft link
 **/log
+.DS_Store
