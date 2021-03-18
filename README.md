@@ -5,8 +5,10 @@ A simple, fast, and efficient object detector **without** FPN.
 Detectron2 version of YOLOF is available at [https://github.
 com/chensnathan/YOLOF](https://github.com/chensnathan/YOLOF).
 
-> [**You Only Look One-level Feature**](http://arxiv.org/abs/xxx),            
+> [**You Only Look One-level Feature**](https://arxiv.org/abs/2103.09460),            
 > Qiang Chen, Yingming Wang, Tong Yang, Xiangyu Zhang, Jian Cheng, Jian Sun
+
+![image](images/yolof.png)
 
 ## Getting Started
 
