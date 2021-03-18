@@ -20,7 +20,7 @@ com/chensnathan/YOLOF](https://github.com/chensnathan/YOLOF).
     python setup.py build install
     cd ..
     ```
-- Download the pretrained model to train with the [CSPDarkNet-53](https://1drv.ms/u/s!AgM0VtBH3kV9imGxZX3n_TMQGtbP?e=YMgpGJ) backbone (**optional**)
+- Download the pretrained model in [OneDrive](https://1drv.ms/u/s!AgM0VtBH3kV9imGxZX3n_TMQGtbP?e=YMgpGJ) or in the [Baidu Cloud](https://pan.baidu.com/s/1BSOncRYq6HeCQ8q2hrWowA) with code `qr6o` to train with the **CSPDarkNet-53** backbone (**optional**)
     ```shell
     mkdir pretrained_models
     # download the `cspdarknet53.pth` to the `pretrained_models` directory
@@ -38,7 +38,7 @@ com/chensnathan/YOLOF](https://github.com/chensnathan/YOLOF).
   
 ## Main results
 
-The models listed below can be found in [this onedrive link](https://1drv.ms/u/s!AgM0VtBH3kV9imGxZX3n_TMQGtbP?e=YMgpGJ). The FPS is tested on a 2080Ti GPU.
+The models listed below can be found in [this onedrive link](https://1drv.ms/u/s!AgM0VtBH3kV9imGxZX3n_TMQGtbP?e=YMgpGJ) or in the [BaiduCloud link](https://pan.baidu.com/s/1BSOncRYq6HeCQ8q2hrWowA) with code `qr6o`. The FPS is tested on a 2080Ti GPU.
 More models will be available in the near future.
 
 | Model                                     |  COCO val mAP |  FPS  |

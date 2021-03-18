@@ -5,7 +5,6 @@ inference_test_output
 .vscode/
 
 *.jpg
-*.png
 *.txt
 
 # compilation and distribution
@@ -39,7 +38,6 @@ wheels/
 /cvpods/model_zoo/configs
 
 # project dirs
-/datasets
 /models
 tools/pods_*
 **/_build
