@@ -48,6 +48,7 @@ More models will be available in the near future.
 | YOLOF_R_101_C5_1x                         |  39.8         |   21  |
 | YOLOF_R_101_DC5_1x                        |  40.5         |   15  |
 | YOLOF_CSP_D_53_DC5_3x                     |  41.2         |   39  |
+| YOLOF_CSP_D_53_DC5_9x                     |  42.8         |   39  |
 
 
 ## Citation
