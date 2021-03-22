@@ -3,6 +3,7 @@ from cvpods.configs.base_detection_config import BaseDetectionConfig
 _config_dict = dict(
     MODEL=dict(
         # Backbone NAME: "build_resnet_backbone"
+        WEIGHTS="detectron2://ImageNetPretrained/MSRA/R-101.pkl",
         RESNETS=dict(DEPTH=101, OUT_FEATURES=["res5"], RES5_DILATION=2),
         ANCHOR_GENERATOR=dict(
             SIZES=[[16, 32, 64, 128, 256, 512]],
@@ -50,7 +51,7 @@ _config_dict = dict(
         LR_SCHEDULER=dict(
             STEPS=(30000, 40000),
             MAX_ITER=45000,
-            WARMUP_FACTOR=0.00066667,
+            WARMUP_FACTOR=0.000334,
             WARMUP_ITERS=3000
         ),
         OPTIMIZER=dict(

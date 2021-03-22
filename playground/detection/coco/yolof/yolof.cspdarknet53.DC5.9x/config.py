@@ -3,6 +3,7 @@ from cvpods.configs.base_detection_config import BaseDetectionConfig
 _config_dict = dict(
     MODEL=dict(
         # Backbone NAME: "build_darknet_backbone"
+        WEIGHTS="../../../../../pretrained_models/cspdarknet53.pth",
         DARKNET=dict(
             DEPTH=53,
             WITH_CSP=True,

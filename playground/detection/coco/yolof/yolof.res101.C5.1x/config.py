@@ -3,6 +3,7 @@ from cvpods.configs.base_detection_config import BaseDetectionConfig
 _config_dict = dict(
     MODEL=dict(
         # Backbone NAME: "build_resnet_backbone"
+        WEIGHTS="detectron2://ImageNetPretrained/MSRA/R-101.pkl",
         RESNETS=dict(DEPTH=101, OUT_FEATURES=["res5"]),
         ANCHOR_GENERATOR=dict(
             SIZES=[[32, 64, 128, 256, 512]],

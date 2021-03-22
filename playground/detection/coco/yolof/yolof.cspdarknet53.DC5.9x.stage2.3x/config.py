@@ -2,9 +2,17 @@ from cvpods.configs.base_detection_config import BaseDetectionConfig
 
 _config_dict = dict(
     MODEL=dict(
-        # Backbone NAME: "build_resnet_backbone"
-        WEIGHTS="detectron2://ImageNetPretrained/MSRA/R-50.pkl",
-        RESNETS=dict(DEPTH=50, OUT_FEATURES=["res5"], RES5_DILATION=2),
+        # Backbone NAME: "build_darknet_backbone"
+        WEIGHTS="../../../../../pretrained_models/YOLOF_CSP_D_53_DC5_9x.pth",
+        # or
+        # WEIGHTS="../yolof.cspdarknet53.DC5.9x/log/model_final.pth",
+        DARKNET=dict(
+            DEPTH=53,
+            WITH_CSP=True,
+            NORM="SyncBN",
+            OUT_FEATURES=["res5"],
+            RES5_DILATION=2
+        ),
         ANCHOR_GENERATOR=dict(
             SIZES=[[16, 32, 64, 128, 256, 512]],
             ASPECT_RATIOS=[[1.0]]
@@ -14,10 +22,10 @@ _config_dict = dict(
                 IN_FEATURES=["res5"],
                 NUM_CHANNELS=512,
                 BLOCK_MID_CHANNELS=128,
-                NUM_RESIDUAL_BLOCKS=4,
-                BLOCK_DILATIONS=[4, 8, 12, 16],
-                NORM="BN",
-                ACTIVATION="ReLU"
+                NUM_RESIDUAL_BLOCKS=8,
+                BLOCK_DILATIONS=[1, 2, 3, 4, 5, 6, 7, 8],
+                NORM="SyncBN",
+                ACTIVATION="LeakyReLU"
             ),
             DECODER=dict(
                 IN_CHANNELS=512,
@@ -25,8 +33,8 @@ _config_dict = dict(
                 NUM_ANCHORS=6,
                 CLS_NUM_CONVS=2,
                 REG_NUM_CONVS=4,
-                NORM="BN",
-                ACTIVATION="ReLU",
+                NORM="SyncBN",
+                ACTIVATION="LeakyReLU",
                 PRIOR_PROB=0.01
             ),
             BBOX_REG_WEIGHTS=(1.0, 1.0, 1.0, 1.0),
@@ -34,7 +42,7 @@ _config_dict = dict(
             CTR_CLAMP=32,
             MATCHER_TOPK=8,
             POS_IGNORE_THRESHOLD=0.1,
-            NEG_IGNORE_THRESHOLD=0.7,
+            NEG_IGNORE_THRESHOLD=0.8,
             FOCAL_LOSS_GAMMA=2.0,
             FOCAL_LOSS_ALPHA=0.25,
             SCORE_THRESH_TEST=0.05,
@@ -49,19 +57,19 @@ _config_dict = dict(
     DATALOADER=dict(NUM_WORKERS=8),
     SOLVER=dict(
         LR_SCHEDULER=dict(
-            STEPS=(15000, 20000),
-            MAX_ITER=22500,
+            STEPS=(52500, 62500),
+            MAX_ITER=67500,
             WARMUP_FACTOR=0.00066667,
             WARMUP_ITERS=1500
         ),
         OPTIMIZER=dict(
             NAME="D2SGD",
-            BASE_LR=0.12,
+            BASE_LR=0.04,
             BIAS_LR_FACTOR=1.0,
             WEIGHT_DECAY=0.0001,
             WEIGHT_DECAY_NORM=0.0,
             MOMENTUM=0.9,
-            BACKBONE_LR_FACTOR=0.334
+            BACKBONE_LR_FACTOR=1.0
         ),
         IMS_PER_BATCH=64,
         IMS_PER_DEVICE=8,
@@ -69,17 +77,21 @@ _config_dict = dict(
     INPUT=dict(
         AUG=dict(
             TRAIN_PIPELINES=[
-                ("ResizeShortestEdge", dict(
-                    short_edge_length=(800,), max_size=1333,
-                    sample_style="choice")),
+                ("JitterCrop", dict(jitter_ratio=0.3)),
+                ("Resize", dict(shape=(640, 640), scale_jitter=(0.8, 1.2))),
+                ("RandomDistortion2",
+                 dict(hue=0.1, saturation=1.5, exposure=1.5)),
                 ("RandomFlip", dict()),
                 ("RandomShift", dict(max_shifts=32))
             ],
             TEST_PIPELINES=[
-                ("ResizeShortestEdge", dict(
-                    short_edge_length=800, max_size=1333,
-                    sample_style="choice")),
+                ("Resize", dict(shape=(608, 608))),
             ],
+        ),
+        MOSAIC=dict(
+            MIN_OFFSET=0.2,
+            MOSAIC_WIDTH=640,
+            MOSAIC_HEIGHT=640
         ),
         # Whether the model needs RGB, YUV, HSV etc.
         FORMAT="BGR",
