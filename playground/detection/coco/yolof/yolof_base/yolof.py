@@ -7,15 +7,16 @@ import torch.distributed as dist
 
 from cvpods.layers import ShapeSpec, cat, generalized_batched_nms
 from cvpods.modeling.basenet import basenet
-from cvpods.modeling.box_regression import Box2BoxTransform
+# from cvpods.modeling.box_regression import Box2BoxTransform
 from cvpods.modeling.losses import sigmoid_focal_loss_jit
 from cvpods.modeling.postprocessing import detector_postprocess
 from cvpods.structures import Boxes, ImageList, Instances
-from cvpods.utils import log_first_n
+from cvpods.utils import log_first_n, comm
 
 from .box_ops import box_iou, generalized_box_iou
 from .uniform_matcher import UniformMatcher
 
+from yolof_base.box_regression import Box2BoxTransform
 
 def permute_to_N_HWA_K(tensor, K):
     """
@@ -207,8 +208,9 @@ class YOLOF(nn.Module):
         gt_classes_target = torch.zeros_like(pred_class_logits)
         gt_classes_target[foreground_idxs, gt_classes[foreground_idxs]] = 1
 
-        dist.all_reduce(num_foreground)
-        num_foreground = num_foreground * 1.0 / dist.get_world_size()
+        if comm.get_world_size() > 1:
+            dist.all_reduce(num_foreground)
+        num_foreground = num_foreground * 1.0 / comm.get_world_size()
 
         # cls loss
         loss_cls = sigmoid_focal_loss_jit(

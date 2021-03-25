@@ -74,8 +74,8 @@ _config_dict = dict(
                 ("ResizeShortestEdge", dict(
                     short_edge_length=(800,), max_size=1333,
                     sample_style="choice")),
-                ("RandomFlip", dict()),
-                ("RandomShift", dict(max_shifts=32))
+                ("RandomFlipYOLOF", dict()),
+                ("RandomShiftYOLOF", dict(max_shifts=32))
             ],
             TEST_PIPELINES=[
                 ("ResizeShortestEdge", dict(

@@ -8,7 +8,9 @@ from cvpods.modeling.anchor_generator import DefaultAnchorGenerator
 from .cspdarknet import build_darknet_backbone
 sys.path.append("..")
 from yolof_base import build_encoder, build_decoder, YOLOF
-
+from yolof_base.coco import *
+from yolof_base.transform import *
+from yolof_base.transform_gen import *
 
 def build_backbone(cfg, input_shape=None):
     """
