@@ -76,7 +76,7 @@ _config_dict = dict(
         AUG=dict(
             TRAIN_PIPELINES=[
                 ("JitterCropYOLOF", dict(jitter_ratio=0.3)),
-                ("Resize", dict(shape=(640, 640), scale_jitter=(0.8, 1.2))),
+                ("ResizeYOLOF", dict(shape=(640, 640), scale_jitter=(0.8, 1.2))),
                 ("RandomDistortionYOLOF",
                  dict(hue=0.1, saturation=1.5, exposure=1.5)),
                 ("RandomFlipYOLOF", dict()),
