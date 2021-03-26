@@ -52,7 +52,7 @@ _config_dict = dict(
         TRAIN=("coco_2017_train",),
         TEST=("coco_2017_val",),
     ),
-    DATALOADER=dict(NUM_WORKERS=8),
+    DATALOADER=dict(NUM_WORKERS=4),
     SOLVER=dict(
         LR_SCHEDULER=dict(
             STEPS=(52500, 62500),
