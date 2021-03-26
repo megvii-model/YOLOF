@@ -52,7 +52,7 @@ _config_dict = dict(
         TRAIN=("coco_2017_train",),
         TEST=("coco_2017_val",),
     ),
-    DATALOADER=dict(NUM_WORKERS=8),
+    DATALOADER=dict(NUM_WORKERS=4),
     SOLVER=dict(
         LR_SCHEDULER=dict(
             STEPS=(187500, 197500),
@@ -75,15 +75,15 @@ _config_dict = dict(
     INPUT=dict(
         AUG=dict(
             TRAIN_PIPELINES=[
-                ("JitterCrop", dict(jitter_ratio=0.3)),
-                ("Resize", dict(shape=(640, 640), scale_jitter=(0.8, 1.2))),
-                ("RandomDistortion2",
+                ("JitterCropYOLOF", dict(jitter_ratio=0.3)),
+                ("ResizeYOLOF", dict(shape=(640, 640), scale_jitter=(0.8, 1.2))),
+                ("RandomDistortionYOLOF",
                  dict(hue=0.1, saturation=1.5, exposure=1.5)),
-                ("RandomFlip", dict()),
-                ("RandomShift", dict(max_shifts=32))
+                ("RandomFlipYOLOF", dict()),
+                ("RandomShiftYOLOF", dict(max_shifts=32))
             ],
             TEST_PIPELINES=[
-                ("Resize", dict(shape=(608, 608))),
+                ("ResizeYOLOF", dict(shape=(608, 608))),
             ],
         ),
         MOSAIC=dict(

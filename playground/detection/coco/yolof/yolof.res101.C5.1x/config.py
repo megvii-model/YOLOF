@@ -46,7 +46,7 @@ _config_dict = dict(
         TRAIN=("coco_2017_train",),
         TEST=("coco_2017_val",),
     ),
-    DATALOADER=dict(NUM_WORKERS=8),
+    DATALOADER=dict(NUM_WORKERS=4),
     SOLVER=dict(
         LR_SCHEDULER=dict(
             STEPS=(15000, 20000),
@@ -72,8 +72,8 @@ _config_dict = dict(
                 ("ResizeShortestEdge", dict(
                     short_edge_length=(800,), max_size=1333,
                     sample_style="choice")),
-                ("RandomFlip", dict()),
-                ("RandomShift", dict(max_shifts=32))
+                ("RandomFlipYOLOF", dict()),
+                ("RandomShiftYOLOF", dict(max_shifts=32))
             ],
             TEST_PIPELINES=[
                 ("ResizeShortestEdge", dict(

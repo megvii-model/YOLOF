@@ -12,7 +12,16 @@ com/chensnathan/YOLOF](https://github.com/chensnathan/YOLOF).
 
 ## Getting Started
 
-- Install `cvpods` by following [the installation guidance](README_cvpods.md).
+- Install `cvpods` and prepare data path, or refer to the [cvpods](https://github.com/Megvii-BaseDetection/cvpods)
+    ```shell
+    git clone https://github.com/Megvii-BaseDetection/cvpods.git
+    pip install -e cvpods --user 
+    ln -s /path/to/your/coco cvpods/datasets/coco
+- Clone the code of `YOLOF` 
+    ```shell
+    git clone https://github.com/megvii-model/YOLOF.git
+    cd YOLOF
+    ```
 - Install `mish-cuda` to speed up the training and inference when using `CSPDarkNet-53` as the backbone (**optional**)
     ```shell
     git clone https://github.com/thomasbrandon/mish-cuda
