@@ -5,9 +5,9 @@ from cvpods.layers import ShapeSpec
 from cvpods.modeling.backbone import Backbone
 from cvpods.modeling.anchor_generator import DefaultAnchorGenerator
 
-from .cspdarknet import build_darknet_backbone
 sys.path.append("..")
 from yolof_base import build_encoder, build_decoder, YOLOF
+from yolof_base.cspdarknet import build_darknet_backbone
 from yolof_base.coco import *
 from yolof_base.transform import *
 from yolof_base.transform_gen import *
